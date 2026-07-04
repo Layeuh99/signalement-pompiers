@@ -270,8 +270,8 @@ textarea:focus, input:focus { outline: none; border-color: var(--charcoal); }
   color: #fff;
   border: none;
   border-radius: 999px;
-  width: 26px;
-  height: 26px;
+  width: 34px;
+  height: 34px;
   cursor: pointer;
   font-size: 12px;
 }
@@ -372,7 +372,9 @@ textarea:focus, input:focus { outline: none; border-color: var(--charcoal); }
   text-decoration: none;
   display: flex;
   align-items: center;
-  padding: 4px;
+  justify-content: center;
+  padding: 8px;
+  font-size: 16px;
 }
 
 /* ---------- Vue Pompiers ---------- */
@@ -743,7 +745,7 @@ textarea:focus, input:focus { outline: none; border-color: var(--charcoal); }
 
 .map-popup .leaflet-popup-content {
   margin: 0;
-  width: 280px !important;
+  width: min(280px, 78vw) !important;
 }
 
 .map-popup .report-card {
@@ -972,4 +974,9 @@ textarea:focus, input:focus { outline: none; border-color: var(--charcoal); }
 
 @media (max-width: 400px) {
   .field-row { grid-template-columns: 1fr; }
+
+  /* En dessous de 400px (iPhone SE, petits Android), 2 colonnes écrasent le
+     texte des types d'urgence les plus longs ("Noyade / secours nautique",
+     "Malaise / urgence médicale") : on repasse en une seule colonne. */
+  .grid-2 { grid-template-columns: 1fr; }
 }
