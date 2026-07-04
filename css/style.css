@@ -344,6 +344,37 @@ textarea:focus, input:focus { outline: none; border-color: var(--charcoal); }
 
 .outline-btn:hover { border-color: var(--charcoal); background: #FAFAF8; }
 
+/* ---------- Connexion pompiers ---------- */
+.pompier-login {
+  max-width: 360px;
+  margin: 60px auto;
+  padding: 32px 24px;
+}
+
+.pompier-login h2 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  margin: 0 0 6px;
+}
+
+.pompier-login-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 24px;
+}
+
+.pompier-login .field { margin-bottom: 16px; }
+.pompier-login .send-btn { margin-top: 8px; }
+
+#pompier-logout-btn {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
 /* ---------- Vue Pompiers ---------- */
 .pompier-toolbar {
   display: flex;

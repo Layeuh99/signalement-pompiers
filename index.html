@@ -88,23 +88,46 @@
 
     <!-- ===================== VUE POMPIERS ===================== -->
     <section id="view-pompier" class="view hidden">
-      <div class="pompier-toolbar">
-        <div class="filters" id="filters"></div>
-        <div class="toolbar-actions">
-          <div class="live-indicator" id="live-indicator">
-            <span class="live-dot"></span> En direct
+      <div id="pompier-login" class="pompier-login">
+        <form id="pompier-login-form">
+          <h2><i data-lucide="lock"></i> Poste de commandement</h2>
+          <p class="pompier-login-sub">Accès réservé aux sapeurs-pompiers authentifiés.</p>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" id="pompier-email" autocomplete="username" required />
           </div>
-          <div class="view-toggle" id="view-toggle">
-            <button class="view-toggle-btn active" data-view="list"><i data-lucide="list"></i> Liste</button>
-            <button class="view-toggle-btn" data-view="map"><i data-lucide="map"></i> Carte</button>
+          <div class="field">
+            <label>Mot de passe</label>
+            <input type="password" id="pompier-password" autocomplete="current-password" required />
           </div>
-        </div>
+          <button type="submit" class="send-btn" id="pompier-login-btn">
+            <i data-lucide="log-in"></i> Se connecter
+          </button>
+        </form>
       </div>
-      <div class="pompier-panels">
-        <div id="reports-list" class="reports-list">
-          <div class="loading-row">Chargement des signalements…</div>
+
+      <div id="pompier-dashboard" class="hidden">
+        <div class="pompier-toolbar">
+          <div class="filters" id="filters"></div>
+          <div class="toolbar-actions">
+            <div class="live-indicator" id="live-indicator">
+              <span class="live-dot"></span> En direct
+            </div>
+            <div class="view-toggle" id="view-toggle">
+              <button class="view-toggle-btn active" data-view="list"><i data-lucide="list"></i> Liste</button>
+              <button class="view-toggle-btn" data-view="map"><i data-lucide="map"></i> Carte</button>
+            </div>
+            <button id="pompier-logout-btn" class="link-btn" title="Se déconnecter">
+              <i data-lucide="log-out"></i>
+            </button>
+          </div>
         </div>
-        <div id="pompier-map" class="pompier-map hidden"></div>
+        <div class="pompier-panels">
+          <div id="reports-list" class="reports-list">
+            <div class="loading-row">Chargement des signalements…</div>
+          </div>
+          <div id="pompier-map" class="pompier-map hidden"></div>
+        </div>
       </div>
     </section>
   </main>
