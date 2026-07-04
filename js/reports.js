@@ -6,6 +6,7 @@ import {
   orderBy,
   doc,
   updateDoc,
+  deleteDoc,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 import { db } from "./firebase-config.js";
@@ -42,4 +43,9 @@ export function subscribeToReports(onChange, onError) {
 // Met à jour le statut d'un signalement (nouveau / encours / traite).
 export async function updateReportStatus(id, status) {
   await updateDoc(doc(db, REPORTS_COLLECTION, id), { status });
+}
+
+// Supprime définitivement un signalement.
+export async function deleteReport(id) {
+  await deleteDoc(doc(db, REPORTS_COLLECTION, id));
 }

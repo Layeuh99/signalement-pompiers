@@ -1,4 +1,4 @@
-import { updateReportStatus, subscribeToReports } from "./reports.js";
+import { updateReportStatus, deleteReport, subscribeToReports } from "./reports.js";
 import { renderReportCard, updateCaserneDistance } from "./reportCard.js";
 import { initMap, renderMarkers, openReportPopup } from "./map.js";
 import { showToast } from "./utils.js";
@@ -202,4 +202,20 @@ function renderList() {
       });
     });
   });
+
+  els.list.querySelectorAll(".report-delete").forEach((btn) => {
+    btn.addEventListener("click", () => handleDelete(btn.dataset.reportId));
+  });
+}
+
+// Suppression définitive : confirmation obligatoire, action irréversible.
+async function handleDelete(id) {
+  if (!confirm("Supprimer définitivement ce signalement ? Cette action est irréversible.")) return;
+  try {
+    await deleteReport(id);
+    showToast("Signalement supprimé.");
+  } catch (err) {
+    console.error(err);
+    showToast("Erreur lors de la suppression.", "error");
+  }
 }

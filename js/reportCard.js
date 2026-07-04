@@ -74,6 +74,10 @@ export function renderReportCard(r) {
       <button type="button" class="report-open-map" data-report-id="${r.id}">
         <i data-lucide="map"></i> Ouvrir sur la carte
       </button>
+
+      <button type="button" class="report-delete" data-report-id="${r.id}">
+        <i data-lucide="trash-2"></i> Supprimer le signalement
+      </button>
     </div>
   `;
 }

@@ -1,9 +1,9 @@
 import { TYPES } from "./constants.js";
-import { updateReportStatus } from "./reports.js";
+import { updateReportStatus, deleteReport } from "./reports.js";
 import { renderReportCard, updateCaserneDistance } from "./reportCard.js";
 import { CASERNES, nearestCaserne } from "./casernes.js";
 import { fetchRoute, trafficLabel } from "./routing.js";
-import { escapeHtml } from "./utils.js";
+import { escapeHtml, showToast } from "./utils.js";
 
 const DEFAULT_CENTER = [14.7167, -17.4677]; // Dakar, Sénégal
 const DEFAULT_ZOOM = 11;
@@ -235,6 +235,19 @@ export function renderMarkers(map, reports) {
       popupEl.querySelectorAll(".report-open-map").forEach((btn) => {
         btn.addEventListener("click", () => {
           map.setView(marker.getLatLng(), Math.max(map.getZoom(), 14));
+        });
+      });
+      popupEl.querySelectorAll(".report-delete").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          if (!confirm("Supprimer définitivement ce signalement ? Cette action est irréversible.")) return;
+          try {
+            await deleteReport(btn.dataset.reportId);
+            map.closePopup();
+            showToast("Signalement supprimé.");
+          } catch (err) {
+            console.error(err);
+            showToast("Erreur lors de la suppression.", "error");
+          }
         });
       });
     });
