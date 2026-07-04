@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Un témoin anonyme doit pouvoir signaler sans compte : création ouverte.
+    // En revanche, lire ou modifier des signalements existants (position des
+    // victimes, changement de statut...) est réservé à des comptes
+    // authentifiés. À ce stade, aucune authentification pompier n'est encore
+    // en place côté app (à venir) : la vue "Poste de commandement" ne pourra
+    // donc plus lire les signalements tant que Firebase Auth n'est pas ajouté.
+    match /reports/{reportId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+  }
+}

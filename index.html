@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1C1F23" />
+  <meta name="description" content="Application de signalement d'urgence en temps réel pour sapeurs-pompiers." />
+  <title>Alerte Secours — Signalement d'urgence</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C8 2 5 5 5 9v4l-2 4h18l-2-4V9c0-4-3-7-7-7z' fill='%23D62828'/%3E%3Ccircle cx='12' cy='20' r='1.6' fill='%23D62828'/%3E%3C/svg%3E" type="image/svg+xml" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/vendor-leaflet.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C8 2 5 5 5 9v4l-2 4h18l-2-4V9c0-4-3-7-7-7z" fill="#D62828"/>
+        <circle cx="12" cy="20" r="1.6" fill="#D62828"/>
+      </svg>
+      <span>ALERTE SECOURS</span>
+    </div>
+    <div class="role-switch">
+      <button id="tab-citoyen" class="role-btn active">Je signale un accident</button>
+      <button id="tab-pompier" class="role-btn">Poste de commandement</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== VUE TEMOIN ===================== -->
+    <section id="view-citoyen" class="view">
+
+      <div id="citoyen-form">
+        <div class="geo-strip" id="geo-strip">
+          <span id="geo-icon"><i data-lucide="loader-circle" class="spin"></i></span>
+          <span id="geo-text">Localisation en cours…</span>
+          <button id="geo-retry" class="link-btn hidden">Réessayer</button>
+        </div>
+
+        <div class="field">
+          <label>Type d'urgence</label>
+          <div id="type-grid" class="grid-2"></div>
+        </div>
+
+        <div class="field">
+          <label>Gravité</label>
+          <div id="gravite-row" class="row"></div>
+        </div>
+
+        <div class="field">
+          <label>Description (optionnel)</label>
+          <textarea id="description" rows="3" placeholder="Nombre de victimes, ce qui s'est passé, dangers visibles…"></textarea>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Votre nom</label>
+            <input type="text" id="nom-temoin" placeholder="Optionnel" />
+          </div>
+          <div class="field">
+            <label>Téléphone</label>
+            <input type="tel" id="telephone" placeholder="Optionnel" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Photo (optionnel)</label>
+          <input type="file" id="photo-input" accept="image/*" capture="environment" class="hidden" />
+          <button id="photo-btn" class="dashed-btn"><i data-lucide="camera"></i> Prendre / ajouter une photo</button>
+          <div id="photo-preview-wrap" class="hidden">
+            <img id="photo-preview" alt="Photo de l'incident" />
+            <button id="photo-remove" class="photo-remove"><i data-lucide="x"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div id="citoyen-success" class="success-panel hidden">
+        <div class="success-icon"><i data-lucide="check"></i></div>
+        <h2>Signalement transmis</h2>
+        <p>Les sapeurs-pompiers ont reçu votre position et les informations. Restez sur place si possible et en sécurité.</p>
+        <button id="new-report-btn" class="outline-btn">Nouveau signalement</button>
+      </div>
+
+      <div class="send-bar" id="send-bar">
+        <button id="send-btn" class="send-btn" disabled><i data-lucide="siren"></i> Alerter les sapeurs-pompiers</button>
+      </div>
+    </section>
+
+    <!-- ===================== VUE POMPIERS ===================== -->
+    <section id="view-pompier" class="view hidden">
+      <div class="pompier-toolbar">
+        <div class="filters" id="filters"></div>
+        <div class="toolbar-actions">
+          <div class="live-indicator" id="live-indicator">
+            <span class="live-dot"></span> En direct
+          </div>
+          <div class="view-toggle" id="view-toggle">
+            <button class="view-toggle-btn active" data-view="list"><i data-lucide="list"></i> Liste</button>
+            <button class="view-toggle-btn" data-view="map"><i data-lucide="map"></i> Carte</button>
+          </div>
+        </div>
+      </div>
+      <div class="pompier-panels">
+        <div id="reports-list" class="reports-list">
+          <div class="loading-row">Chargement des signalements…</div>
+        </div>
+        <div id="pompier-map" class="pompier-map hidden"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- Lucide (icônes vectorielles, hébergé localement dans js/vendor/) -->
+  <script src="js/vendor/lucide.min.js"></script>
+  <!-- Leaflet (hébergé localement dans js/vendor/) -->
+  <script src="js/vendor/leaflet.js"></script>
+  <!-- Firebase (via CDN, aucun outil de build nécessaire) -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

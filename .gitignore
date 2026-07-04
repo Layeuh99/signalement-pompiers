@@ -1,0 +1,9 @@
+# Config Firebase réelle (clé, projectId...) — voir js/firebase-config.example.js
+js/firebase-config.js
+
+# Config TomTom réelle (clé API) — voir js/tomtom-config.example.js
+js/tomtom-config.js
+
+# Artefacts locaux Firebase CLI
+firebase-debug.log
+.firebase/
