@@ -1,8 +1,8 @@
-# Config Firebase réelle (clé, projectId...) — voir js/firebase-config.example.js
-js/firebase-config.js
-
-# Config TomTom réelle (clé API) — voir js/tomtom-config.example.js
-js/tomtom-config.js
+# js/firebase-config.js et js/tomtom-config.js sont commités volontairement :
+# ce sont des clés client (pas des secrets serveur), protégées par restriction
+# de domaine (Google Cloud Console / TomTom dashboard) et par les règles
+# Firestore, pas par leur confidentialité. Nécessaire pour que le déploiement
+# statique (GitHub Pages) fonctionne sans étape de build.
 
 # Artefacts locaux Firebase CLI
 firebase-debug.log
